@@ -1,4 +1,6 @@
 link_libraries(obstacles
+               CPG_feedback
+                KinematicString
                 learningSpines
                 sensors
                 controllers

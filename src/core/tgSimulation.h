@@ -22,7 +22,7 @@
 /**
  * @file tgSimulation.h
  * @brief Contains the definition of class tgSimulation
- * @author Ryan Adams, Brian Mirletz, Drew Sabelhaus
+ * @author Ryan Adams, Brian Mirletz
  * $Id$
  */
 
@@ -36,7 +36,6 @@ class tgModelVisitor;
 class tgSimView;
 class tgWorld;
 class tgGround;
-class tgDataManager;
 
 /**
  * Holds objects necessary for simulation, a world, a view
@@ -80,8 +79,8 @@ public:
      * an exception is thrown if it is NULL
      * @throw std::invalid_argument if pModel is NULL
      */
+
     void addModel(tgModel* pModel);
-    
     /**
      * Add an obstacle to the simulation.
      * Obstacles are deleted upon reset.
@@ -90,15 +89,6 @@ public:
      * @throw std::invalid_argument if pModel is NULL
      */
     void addObstacle(tgModel* pObstacle);
-
-    /**
-     * Add a data manager to the simulation.
-     * For example, add a data logger.
-     * @param[in] pDataManager a pointer to a tgDataManager which will
-     * capture or collect data. Exception thrown if NULL.
-     * @throw std::invalid_argument if pDataManager is NULL
-     */
-    void addDataManager(tgDataManager* pDataManager);
     
     /**
      * Pass the tgModelVisitor to all of the models
@@ -155,13 +145,6 @@ private:
      * All pointers should be non-NULL
      */
     std::vector<tgModel*> m_obstacles;
-
-    /**
-     * All the data managers for this simulation.
-     * Similar structure to the models and obstacles.
-     * All pointers should be non-NULL.
-     */
-    std::vector<tgDataManager*> m_dataManagers;
 };
 
 #endif  // TG_SIMULATION_H

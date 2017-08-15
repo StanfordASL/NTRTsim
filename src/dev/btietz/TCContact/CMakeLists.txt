@@ -1,6 +1,8 @@
 link_directories(${LIB_DIR})
 
-link_libraries(learningSpines
+link_libraries(CPG_feedback
+                KinematicString
+                learningSpines
                 sensors
                 tgcreator             
                 core

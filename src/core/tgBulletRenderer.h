@@ -31,7 +31,6 @@
 
 // Forward declarations
 class tgSpringCableActuator;
-class tgCompressionSpringActuator;
 class tgModel;
 class tgRod;
 class tgWorld;
@@ -54,12 +53,6 @@ public:
    * @param[in] linearString a const reference to a tgSpringCableActuator to render
    */
   virtual void render(const tgSpringCableActuator& mSCA) const;
-
- /**
-   * Render a tgCompressionSpringActuator.
-   * @param[in] compressionSpringActuator a const reference to a tgCompressionSpringActuator to render
-   */
-  virtual void render(const tgCompressionSpringActuator& compressionSpringActuator) const;
  
   /**
    * Render a tgRod.

@@ -7,18 +7,13 @@ add_library( ${PROJECT_NAME} SHARED
     tgSpringCable.cpp
     tgBulletSpringCable.cpp
     tgBulletContactSpringCable.cpp
-    tgBulletCompressionSpring.cpp
-    tgBulletUnidirComprSpr.cpp
     
     tgModel.cpp
     tgSpringCableActuator.cpp
     tgBasicActuator.cpp
     tgKinematicActuator.cpp
-    tgCompressionSpringActuator.cpp
-    tgUnidirComprSprActuator.cpp
     tgWorld.cpp
     tgSimulation.cpp
-    tgSenseable.cpp
     tgBulletRenderer.cpp
     tgSimView.cpp
     tgSimViewGraphics.cpp
@@ -27,7 +22,6 @@ add_library( ${PROJECT_NAME} SHARED
     tgBaseRigid.cpp
     tgRod.cpp
     tgBox.cpp
-    tgBoxMoreAnchors.cpp
     tgSphere.cpp
     
     abstractMarker.cpp

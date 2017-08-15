@@ -19,7 +19,7 @@
 /**
  * @file tgBoxInfo.cpp
  * @brief Implementation of class tgBoxInfo 
- * @author Brian Mirletz, Ryan Adams, Drew Sabelhaus
+ * @author Brian Mirletz and Ryan Adams
  * @date September 2014
  * $Id$
  */
@@ -118,17 +118,12 @@ btCollisionShape* tgBoxInfo::getCollisionShape(tgWorld& world) const
 
 double tgBoxInfo::getMass() const
 {
-  // NOTE that this function previously assumed that the full width and full height
-  // of the box are specified by the config. However, the box is actually
-  // twice that width and twice that height. See the call to btBoxShape inside
-  // the getCollisionShape method in this class.
-  // This function now corrects for a proper volume.
-  const double length = getLength();
-  const double width = m_config.width;
-  const double height = m_config.height;
-  const double density = m_config.density;
-  const double volume =  length * (width*2) * (height*2);
-  return volume * density;
+    const double length = getLength();
+	const double width = m_config.width;
+	const double height = m_config.height;
+    const double density = m_config.density;
+    const double volume =  length * width * height;
+    return volume * density;
 }
 
 btVector3 

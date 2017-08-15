@@ -1,5 +1,7 @@
 link_libraries(GoalSpine
                 obstacles
+               CPG_feedback
+                KinematicString
                 learningSpines
                 sensors
                 controllers

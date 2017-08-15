@@ -9,6 +9,8 @@ link_libraries(learningSpines
                AnnealEvolution
                tgOpenGLSupport
                obstacles
+               KinematicString
+               CPG_feedback
                sensors
                controllers
 	       BigPuppySpineOnly

@@ -27,7 +27,7 @@
 
 // This application
 #include "FlemonsSpineModelContact.h"
-#include "examples/learningSpines/SpineFeedbackControl.h"
+#include "dev/CPG_feedback/SpineFeedbackControl.h"
 
 // This library
 #include "core/tgModel.h"

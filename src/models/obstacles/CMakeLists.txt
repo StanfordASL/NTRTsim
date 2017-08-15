@@ -13,7 +13,6 @@ add_library(${PROJECT_NAME} SHARED
         		tgStairs.cpp
 			tgCraterDeep.cpp
 			tgCraterShallow.cpp
-			tgWall.cpp
             )
 
 add_executable(AppObstacleTest

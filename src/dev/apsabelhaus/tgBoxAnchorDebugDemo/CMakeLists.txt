@@ -1,4 +1,4 @@
-link_libraries(tgcreator controllers core sensors)
+link_libraries(tgcreator controllers core)
 
 add_executable(AppTgBoxAnchorDebugDemo
     tgBoxAnchorDebugModel.cpp

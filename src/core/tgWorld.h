@@ -109,11 +109,6 @@ public:
   {
     return *m_pImpl;
   }
-
-  /**
-   * Returns the level of gravity in this world.
-   */
-  double getWorldGravity() const;
  
 private:
 

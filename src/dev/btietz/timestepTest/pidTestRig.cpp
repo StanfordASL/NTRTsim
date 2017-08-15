@@ -27,7 +27,7 @@
 // This library
 #include "core/tgKinematicActuator.h"
 #include "tgcreator/tgKinematicActuatorInfo.h"
-#include "examples/learningSpines/tgSCASineControl.h"
+#include "dev/btietz/kinematicString/tgSCASineControl.h"
 #include "controllers/tgPIDController.h"
 #include "controllers/tgImpedanceController.h"
 

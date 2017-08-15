@@ -8,6 +8,8 @@ link_libraries(boost_program_options
                AnnealEvolution
                tgOpenGLSupport
                obstacles
+               KinematicString
+               CPG_feedback
                sensors
                controllers
 	       BigPuppySpineOnlyStats
@@ -25,4 +27,4 @@ add_executable(AppSpineControlStats
 	       JSONQuadCPGControl.cpp)
 
 target_link_libraries(AppSpineControlStats ${ENV_LIB_DIR}/libjsoncpp.a FileHelpers boost_program_options obstacles BigPuppySpineOnlyStats)
-target_link_libraries(JSONQuadControl ${ENV_LIB_DIR}/libjsoncpp.a FileHelpers boost_program_options obstacles BigPuppySpineOnlyStats)
+target_link_libraries(JSONQuadControl ${ENV_LIB_DIR}/libjsoncpp.a FileHelpers boost_program_options obstacles BigPuppySpineOnlyStats KinematicString)

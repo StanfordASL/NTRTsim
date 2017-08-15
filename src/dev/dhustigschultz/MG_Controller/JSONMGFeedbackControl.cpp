@@ -43,8 +43,8 @@
 #include "learning/AnnealEvolution/AnnealEvolution.h"
 #include "learning/Configuration/configuration.h"
 
-#include "util/CPGEquationsFB.h"
-#include "examples/learningSpines/tgCPGCableControl.h"
+#include "dev/CPG_feedback/CPGEquationsFB.h"
+#include "dev/CPG_feedback/CPGNodeFB.h"
 
 #include "neuralNet/Neural Network v2/neuralNetwork.h"
 

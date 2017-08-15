@@ -19,6 +19,5 @@ Contents
    yaml-model-builder.rst
    learning-library-walkthrough.rst
    motors-and-cables.rst
-   data-management-and-logging.rst	      
    third-party-libraries.rst
    contribute-tutorials.rst

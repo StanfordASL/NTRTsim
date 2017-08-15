@@ -8,6 +8,8 @@ link_libraries(boost_program_options
                AnnealEvolution
                tgOpenGLSupport
                obstacles
+               KinematicString
+               CPG_feedback
                sensors
                controllers
 	       BaseQuadModelLearning

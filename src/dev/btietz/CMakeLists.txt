@@ -12,11 +12,13 @@ subdirs(
     handTunedSineWaves
     muscleNPTests
     tetraCollisions
+    muscleNPEnergy
     muscleNPHills
     TCContact
     ShortOC_CPG 
     ShortOC_sine
     timestepTest
+    kinematicString
     GATests
     multiTerrain
     TetraSpine_multiTerrain/

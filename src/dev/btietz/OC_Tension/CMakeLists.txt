@@ -2,7 +2,10 @@ link_libraries(JSONGoalTension
                 OctahedralComplex
                 GoalSpine
                 obstacles
+                KinematicString
                flemonsSpineContact
+               CPG_feedback
+                KinematicString
                 learningSpines
                 sensors
                 controllers

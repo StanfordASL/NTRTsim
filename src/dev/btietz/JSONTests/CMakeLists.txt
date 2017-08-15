@@ -1,6 +1,7 @@
 link_directories(${LIB_DIR})
 
 link_libraries(octahedralComplex
+                CPG_feedback
                 learningSpines
                 sensors
                 tgcreator
@@ -37,8 +38,8 @@ add_executable(AppTerrainJSON
 
 target_link_libraries(AppJSONTests ${ENV_LIB_DIR}/libjsoncpp.a FileHelpers)
 target_link_libraries(AppSpineJSON ${ENV_LIB_DIR}/libjsoncpp.a FileHelpers)
-target_link_libraries(AppTerrainJSON ${ENV_LIB_DIR}/libjsoncpp.a FileHelpers boost_program_options obstacles flemonsSpineContact)
-target_link_libraries(JSONControl ${ENV_LIB_DIR}/libjsoncpp.a FileHelpers boost_program_options obstacles flemonsSpineContact)
+target_link_libraries(AppTerrainJSON ${ENV_LIB_DIR}/libjsoncpp.a FileHelpers boost_program_options obstacles flemonsSpineContact KinematicString)
+target_link_libraries(JSONControl ${ENV_LIB_DIR}/libjsoncpp.a FileHelpers boost_program_options obstacles flemonsSpineContact KinematicString)
 configure_file("controlVars.json" "controlVars.json" COPYONLY)
 configure_file("controlVarsOct.json" "controlVarsOct.json" COPYONLY)
 

@@ -8,4 +8,5 @@ add_executable(MotorTimestep_test
 
 target_link_libraries(MotorTimestep_test ${ENV_LIB_DIR}/libgtest.a pthread 
 			${NTRT_BUILD_DIR}/core/libcore.so
-			${NTRT_BUILD_DIR}/examples/motorModel/libTimestepTest.so)
+			${NTRT_BUILD_DIR}/dev/btietz/kinematicString/libKinematicString.so
+			${NTRT_BUILD_DIR}/dev/btietz/timestepTest/libTimestepTest.so)

@@ -27,7 +27,7 @@
 */
 
 // This application
-#include "examples/motorModel/tsTestRig.h"
+#include "dev/btietz/timestepTest/tsTestRig.h"
 // This library
 #include "core/tgSpringCableActuator.h"
 #include "core/tgModel.h"
