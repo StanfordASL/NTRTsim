@@ -15,7 +15,6 @@ ${BULLET_SERIALIZE_DIR}/BulletWorldImporter
 link_directories(
 ${LIB_DIR}
 ${BULLET_SERIALIZE_DIR}/BulletFileLoader
-${BULLET_SERIALIZE_DIR}/BulletWorldImporter
 )
 
 link_libraries(core

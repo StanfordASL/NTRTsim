@@ -68,6 +68,7 @@ int main (void)
 		//iteration = (i+1)-1
                 std::cout <<(i+1)*0.016666667 << std::endl; 
 		std::cout << "sphere height: " << trans.getOrigin().getY() << std::endl;
+		std::cout << "sphere velocity: " << trans.getOrigin().getY() << std::endl;
 		
 		//printf("time = %f",float(interation()));
         }

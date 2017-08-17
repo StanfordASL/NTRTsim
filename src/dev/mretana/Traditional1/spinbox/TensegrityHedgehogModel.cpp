@@ -522,9 +522,6 @@ void TensegrityHedgehogModel::moveModel(btVector3 positionVector,btVector3 rotat
 	initialTransform.setRotation(initialRotationQuat);
 	initialTransform.setOrigin(positionVector);
 	
-	
-	
-
 	for(int i=0;i<boxes.size();i++)
 	{
 			//rods[i]->getPRigidBody()->setLinearVelocity(speedVector);
@@ -542,9 +539,9 @@ void TensegrityHedgehogModel::moveModel(btVector3 positionVector,btVector3 rotat
 			btTransform COM;//
 			
 			boxes[i]->getPRigidBody()->getMotionState()->getWorldTransform(COM);
-			//const btVector3& result = COM.getOrigin();
-			std::cout << "Cube Height: " << COM.getOrigin().getY() <<  std::endl;
-			//std::cout << result<< std::endl;
+			const btVector3& result = COM.getOrigin();
+			//std::cout << "Cube Height: " << COM.getOrigin().getY() <<  std::endl;
+			std::cout << result<< std::endl;
 			
 		}
 	}
