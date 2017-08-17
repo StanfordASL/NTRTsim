@@ -14,4 +14,5 @@ Subdirs(
         test1
 	Proto1
 	HedgeHeightSensor
+        Logging
 )

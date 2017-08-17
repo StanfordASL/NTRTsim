@@ -41,6 +41,7 @@
 #include "tgcreator/tgRodInfo.h"
 #include "tgcreator/tgStructure.h"
 #include "tgcreator/tgStructureInfo.h"
+#include <btBulletDynamicsCommon.h>
 //Box add
 #include "LinearMath/btVector3.h"
 #include "BulletDynamics/Dynamics/btRigidBody.h"
@@ -48,9 +49,12 @@
 #include "LinearMath/btQuaternion.h"
 #include "LinearMath/btTransform.h"
 // The C++ Standard Library
+#include <iostream>
+#include <stdio.h>
 #include <stdexcept>
 #include "core/abstractMarker.h" //Abstract marker
 // Dependencies coming from Gyro
+
 /*#include "btBulletDynamicsCommon.h"
 #include "LinearMath/btIDebugDraw.h"
 
@@ -61,6 +65,7 @@
 
 #include "GL_ShapeDrawer.h"
 #include "GlutStuff.h"
+
 
 
 #include "GLDebugDrawer.h"
@@ -306,9 +311,9 @@ void TensegrityHedgehogModel::setup(tgWorld& world)
     //addActuators(s);
     
     // Move the structure so it doesn't start in the ground
-    y.move(btVector3(10,1, 10 ));
-    y.addRotation(btVector3(10,1,10),btVector3(0,0,1), 180); // Z blue Axis
-    y.addRotation(btVector3(10,1,10),btVector3(1,0,0), 260); // X red axis
+    y.move(btVector3(10,5, 10 ));
+    y.addRotation(btVector3(10,5,10),btVector3(0,0,1), 180); // Z blue Axis
+    y.addRotation(btVector3(10,5,10),btVector3(1,0,0), 260); // X red axis
     //s.move(btVector3(5,5, 5));
   //s.addRotation(btVector3(0,10,0),btVector3(4,12,3),btVector3(1,45,18));
     //btTransform T(btQuaternion(btVector3(0,1,0),btRadians(60)),btVector3(0.0,0.5,0));
@@ -360,7 +365,7 @@ void TensegrityHedgehogModel::setup(tgWorld& world)
     
     btVector3 location(0,0,0);
     btVector3 rotation(0.0,0,0.0);
-    btVector3 angular(3,0,0); //Rad/sec y is up.
+    btVector3 angular(10,0,0); //Rad/sec y is up.
     //btVector3 angular(30,0,0);
     this->moveModel(location,rotation,angular);
     
@@ -518,6 +523,8 @@ void TensegrityHedgehogModel::moveModel(btVector3 positionVector,btVector3 rotat
 	initialTransform.setOrigin(positionVector);
 	
 	
+	
+
 	for(int i=0;i<boxes.size();i++)
 	{
 			//rods[i]->getPRigidBody()->setLinearVelocity(speedVector);
@@ -526,8 +533,35 @@ void TensegrityHedgehogModel::moveModel(btVector3 positionVector,btVector3 rotat
 			boxes[i]->getPRigidBody()->setAngularVelocity(angularVector);
 			boxes[i]->getPRigidBody()->setWorldTransform(initialTransform * boxes[i]->getPRigidBody()->getWorldTransform());
 	}
-}
+ for(int j=0;j<5;j++)
+			{
 
+
+		for(int i=0;i<boxes.size();i++)
+		{
+			btTransform COM;//
+			
+			boxes[i]->getPRigidBody()->getMotionState()->getWorldTransform(COM);
+			//const btVector3& result = COM.getOrigin();
+			std::cout << "Cube Height: " << COM.getOrigin().getY() <<  std::endl;
+			//std::cout << result<< std::endl;
+			
+		}
+	}
+}
+/*
+//DATA Logger 
+for (int i = 0; i < 599; i++) {
+                btTransform trans;
+                boxes[i]->getPRigidBody()->setWorldTransform(trans * boxes[i]->getPRigidBody()->getWorldTransform());
+
+		//iteration = (i+1)-1
+                std::cout <<(i)*0.016666667 << std::endl; //The step size is 1/60 go to app file to double check
+		std::cout << "box  height: " << trans.getOrigin().getY() << std::endl;
+		
+		//printf("time = %f",float(interation()));
+        }
+*/
 //Box rotation
 /*
 void	tgStructureInfo::initRigidBodies(tgWorld& world){

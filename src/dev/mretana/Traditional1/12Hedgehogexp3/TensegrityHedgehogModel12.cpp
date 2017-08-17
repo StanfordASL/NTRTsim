@@ -53,6 +53,7 @@ extern btAlignedObjectArray<btVector3> debugContacts;
 extern btAlignedObjectArray<btVector3> debugNormals;
 #endif 
 #include <iostream>
+#include <stdexcept>
 
 
 
@@ -605,19 +606,19 @@ void TensegrityHedgehogModel12::teardown()
 // Pre-condition: This model has 12 rods
 
 std::vector<double> TensegrityHedgehogModel12::getBallCOM() {   
-    std::vector <tgRod*> rods = find<tgRod>("rod");
-    assert(!rods.empty());
+    std::vector <tgBox*> boxes = find<tgBox>("box");
+    assert(!boxes.empty());
 	
    //Calculate COM
     btVector3 ballCenterOfMass(0, 0, 0);
     double ballMass = 0.0; 
-    for (std::size_t i = 0; i < rods.size(); i++) {   
-        const tgRod* const rod = rods[i];
-        assert(rod != NULL);
-        const double rodMass = rod->mass();
-        const btVector3 rodCenterOfMass = rod->centerOfMass();
-        ballCenterOfMass += rodCenterOfMass * rodMass;
-        ballMass += rodMass;
+    for (std::size_t i = 0; i < boxes.size(); i++) {   
+        const tgBox* const box = boxes[i];
+        assert(box != NULL);
+        const double boxMass = box->mass();
+        const btVector3 boxCenterOfMass = box->centerOfMass();
+        ballCenterOfMass += boxCenterOfMass * boxMass;
+        ballMass += boxMass;
     }
 
     assert(ballMass > 0.0);
@@ -626,8 +627,9 @@ std::vector<double> TensegrityHedgehogModel12::getBallCOM() {
     // Copy to the result std::vector
     std::vector<double> result(3);
     for (size_t i = 0; i < 3; ++i) { result[i] = ballCenterOfMass[i]; }
-    std::cout<<"COM: (" << result[0] << ", " << result[1] << ", " << result[2] << ")\n";
+    std::cout<<"COM: (" << result[0] << ", " << result[1] << ", " << result[2] << ")\n"<< std::endl;
     return result;
+    //std::cout << result<< std::endl;
 }
 /*
 std::vector<double> TensegrityHedgehogModel12::Position() {
