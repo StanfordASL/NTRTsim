@@ -26,8 +26,6 @@ add_executable(AppTetraSpineHardwareSine
 	AppTetraSpineHardwareSine.cpp
 )
 
-file(COPY nodeConfig.ini DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-file(COPY edgeConfig.ini DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 
 add_custom_command(TARGET AppTetraSpineHardwareSine POST_BUILD
