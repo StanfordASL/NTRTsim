@@ -31,11 +31,18 @@
 #include "core/tgSubject.h"
 
 //used for data observer
+#include "core/tgBasicActuator.h"
+#include "tgcreator/tgBasicActuatorInfo.h"
+#include "tgcreator/tgBuildSpec.h"
 #include "core/tgObserver.h"
 #include "sensors/tgDataObserver.h"
 #include "LinearMath/btVector3.h"
 #include "core/tgRod.h"
+#include "core/tgBox.h"
+#include "tgcreator/tgBoxInfo.h"
 #include "tgcreator/tgNode.h"
+#include "tgcreator/tgStructure.h"
+#include "tgcreator/tgStructureInfo.h"
 
 
  
@@ -43,8 +50,8 @@
 #include <vector>
 
 // Forward declarations
-class tgSpringCableActuator;  //Controller
-//class tgBasicActuator;
+//class tgSpringCableActuator;  //Controller
+class tgBasicActuator;
 class tgModelVisitor;
 class tgStructure;
 class tgWorld;
@@ -55,14 +62,6 @@ class tgWorld;
 class TensegrityHedgehogModel12 : public tgSubject<TensegrityHedgehogModel12>, public tgModel
 {
 	
-	//Display text
-		enum
-	{
-		USE_CCD=1,
-		USE_NO_CCD
-	};
-	int 	m_ccdMode;
-	//Display text
 	
 public: 
 	
@@ -116,27 +115,17 @@ public:
      * to itself 
      */
     virtual void onVisit(tgModelVisitor& r);
-    
-    void displayText();//Display text
-    
-    //Other display text EXP
-   /* virtual void keyboardCallback(unsigned char key, int x, int y);
-	virtual void displayCallback();
-	virtual void	shootBox(const btVector3& destination);
-	virtual void	clientResetScene();*/
-//Display text EXP
-    
-    /**
-     * Return a vector of all muscles for the controllers to work with.
-     * @return A vector of all of the muscles
-     */
+
     const std::vector<tgSpringCableActuator*>& getAllMuscles() const; //Controller
     
+    std::vector<tgBasicActuator*>& getAllActuators();
     /**
      * Return a vector of all rod bodies for the controllers to work with.
      * @return A vector of all of the rod rigid bodies
      */
     std::vector<tgRod*>& getAllRods();
+    
+    std::vector<tgBox*>& getAllBoxes();
     
     std::vector<double> getBallCOM(); // Getting COM
     
@@ -176,6 +165,8 @@ private:
      * through setup
      */
     std::vector<tgSpringCableActuator*> allMuscles; //Controller
+
+	std::vector<tgBasicActuator*> allActuators;
 /**
          * A function called during setup that determines the positions of
          * the nodes (center points of opposing box faces) 
@@ -206,6 +197,7 @@ private:
      * through setup when it is filled using tgModel's find methods
      */
     std::vector<tgRod*> allRods;
+    std::vector<tgBox*> allBoxes;
 };
 
 #endif  // TENSEGRITY_HEDGEHOGMODEL12_H

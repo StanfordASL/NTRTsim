@@ -25,7 +25,7 @@
 
 // This application
 #include "TensegrityHedgehogModel12.h"
-//#include "LengthController.h"
+#include "LengthController.h"
 // This library
 #include "core/terrain/tgBoxGround.h"
 #include "core/tgModel.h"
@@ -68,7 +68,7 @@ int main(int argc, char** argv)
     // the world will delete this
     tgBoxGround* ground = new tgBoxGround(groundConfig);
     
-    const tgWorld::Config config(98.1); // gravity, cm/sec^2  Use this to adjust length scale of world.
+    const tgWorld::Config config(9.81); // gravity, cm/sec^2  Use this to adjust length scale of world.
         // Note, by changing the setting below from 981 to 98.1, we've
         // scaled the world length scale to decimeters not cm.
     tgWorld world(config, ground);
@@ -87,35 +87,11 @@ int main(int argc, char** argv)
     
     //Controllers
     // Create the controller
-    //LengthController* const myController = new LengthController();
+    LengthController* const myController = new LengthController();
     
     //Attach controller to the model
-    //myModel->attach(myController);
-     //Controllers
-     /*
-//Display 
-     std::cout << "Hello" << std::endl;
-     	for (i=0;i<100;i++)
-	{
-		tgWorld->timestep_graphics(1.f/60.f,10);
-		
-		//print positions of all objects
-		for (int j=tgWorld->getNumCollisionObjects()-1; j>=0 ;j--)
-		{
-			btCollisionObject* obj = tgWorld->getCollisionObjectArray()[j];
-			btRigidBody* body = btRigidBody::upcast(obj);
-			if (body && body->getMotionState())
-			{
-				btTransform trans;
-				body->getMotionState()->getWorldTransform(trans);
-				printf("world pos = %f,%f,%f\n",float(trans.getOrigin().getX()),float(trans.getOrigin().getY()),float(trans.getOrigin().getZ()));
-			}
-		}
-	}
-     //Display
-     */
-     
-     
+    myModel->attach(myController);
+
     // Add the model to the world
     simulation.addModel(myModel);
     

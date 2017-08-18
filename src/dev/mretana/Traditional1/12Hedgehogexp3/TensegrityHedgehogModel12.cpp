@@ -35,6 +35,7 @@
 #include "tgcreator/tgRodInfo.h"
 #include "tgcreator/tgStructure.h"
 #include "tgcreator/tgStructureInfo.h"
+#include "core/tgString.h"
 // The Bullet Physics library
 #include "LinearMath/btVector3.h"
 #include "BulletDynamics/Dynamics/btRigidBody.h"
@@ -242,6 +243,7 @@ void TensegrityHedgehogModel12::addRods(tgStructure& s)
     s.addPair( 20,  21, "rod");
     s.addPair(22, 23, "rod");*/
 	//Contruct all the bars plus mid bars for the midnodes
+	/* First Controller
     s.addPair( 0, 38,"rod");  
     s.addPair(0, 1, "rod");
     s.addPair( 2,  39, "rod");
@@ -266,6 +268,32 @@ void TensegrityHedgehogModel12::addRods(tgStructure& s)
     s.addPair( 20,  21, "rod");
     s.addPair(22, 49, "rod");
     s.addPair(22, 23, "rod");
+    */
+    
+    s.addPair( 0, 38,tgString("rod num", 0));  
+    s.addPair(0, 1, tgString("rod num", 1));
+    s.addPair( 2,  39, tgString("rod num", 2));
+    s.addPair( 2,  3, tgString("rod num", 3));
+    s.addPair( 4,  40, tgString("rod num", 4));
+    s.addPair( 4,  5, tgString("rod num", 5));
+    s.addPair( 6,  41, tgString("rod num", 6));
+    s.addPair( 6,  7, tgString("rod num", 7));
+    s.addPair( 8,  42, tgString("rod num", 8));
+    s.addPair( 8,  9, tgString("rod num", 9));
+    s.addPair(10, 43, tgString("rod num", 10));
+    s.addPair(10, 11, tgString("rod num", 11));
+     s.addPair( 12,  44, tgString("rod num", 12));
+    s.addPair( 12,  13, tgString("rod num", 13));
+    s.addPair( 14,  45, tgString("rod num", 14));
+    s.addPair( 14,  15, tgString("rod num", 15));
+    s.addPair( 16,  46, tgString("rod num", 16));
+    s.addPair( 16,  17, tgString("rod num", 17));
+    s.addPair( 18,  47, tgString("rod num", 18));
+    s.addPair( 18,  19, tgString("rod num", 19));
+    s.addPair( 20,  48, tgString("rod num", 20));
+    s.addPair( 20,  21, tgString("rod num", 21));
+    s.addPair(22, 49, tgString("rod num", 22));
+    s.addPair(22, 23, tgString("rod num", 23));
 
     // Payload
     //s.addPair(12, 13, "payload_rod");
@@ -329,6 +357,7 @@ void TensegrityHedgehogModel12::addRods(tgStructure& s)
 
 void TensegrityHedgehogModel12::addMuscles(tgStructure& s)
 {
+	/* First controller
     // Outer Cables
     s.addPair(0, 2,  "muscle");
     s.addPair(0, 14,  "muscle");
@@ -367,6 +396,44 @@ void TensegrityHedgehogModel12::addMuscles(tgStructure& s)
     s.addPair(9, 20,  "muscle");
     s.addPair(20, 13,  "muscle");
     s.addPair(16, 5,  "muscle");
+    */
+    s.addPair(0, 2,  tgString("actuator num", 0));
+    s.addPair(0, 14,  tgString("actuator num", 1));
+    s.addPair(0, 11,  tgString("actuator num", 2));
+    s.addPair(0, 4, tgString("actuator num", 3));
+    s.addPair(2, 4,  tgString("actuator num", 4));
+    s.addPair(2, 15,  tgString("actuator num", 5));
+    s.addPair(4, 15,  tgString("actuator num", 6));
+    s.addPair(4, 6, tgString("actuator num", 7));
+    s.addPair(6, 8,  tgString("actuator num", 8));
+    s.addPair(6, 3,  tgString("actuator num", 9));
+    s.addPair(8, 3,  tgString("actuator num", 10));
+    s.addPair(3, 23, tgString("actuator num", 11));
+    s.addPair(8, 10,  tgString("actuator num", 12));
+    s.addPair(10, 12,  tgString("actuator num", 13));
+    s.addPair(10, 7,  tgString("actuator num", 14));
+    s.addPair(7, 12, tgString("actuator num", 15));
+    s.addPair(14, 12,  tgString("actuator num", 16));
+    s.addPair(14, 11, tgString("actuator num", 17));
+    s.addPair(23, 20, tgString("actuator num", 18));
+    s.addPair(9, 23,  tgString("actuator num", 19));
+    s.addPair(7, 17,  tgString("actuator num", 20));
+    s.addPair(17, 13, tgString("actuator num", 21));
+    s.addPair(13, 22, tgString("actuator num", 22));
+    s.addPair(22, 17,  tgString("actuator num", 23));
+    s.addPair(22, 1,  tgString("actuator num", 24)); 
+    s.addPair(1, 16,  tgString("actuator num", 25));
+    s.addPair(16, 19, tgString("actuator num", 26));
+    s.addPair(19, 1,  tgString("actuator num", 27));
+    s.addPair(19, 11, tgString("actuator num", 28));
+    s.addPair(5, 18,  tgString("actuator num", 29));
+    s.addPair(18, 21, tgString("actuator num", 30));
+    s.addPair(21, 5,  tgString("actuator num", 31));
+    s.addPair(21, 15, tgString("actuator num", 32));
+    s.addPair(18, 9, tgString("actuator num", 33));
+    s.addPair(9, 20,  tgString("actuator num", 34));
+    s.addPair(20, 13,  tgString("actuator num", 35));
+    s.addPair(16, 5,  tgString("actuator num", 36));
 /*
     // Hedgehog Cage Internal cables
     s.addPair(1, 24, "muscle_in"); //Bottom 
@@ -464,12 +531,15 @@ void TensegrityHedgehogModel12::setup(tgWorld& world)
                 c.rollfriction, c.restitution);
     
    // Define configuration for actuators
+	/*
    tgSpringCableActuator::Config muscleConfig(c.stiffness, c.damping, c.pretension * c.stiffness / c.stiffness_in, c.history,
 					    c.maxTens, c.targetVelocity); 
-
+*/
     tgSpringCableActuator::Config muscleInConfig(c.stiffness_in, c.damping_in, c.pretension, c.history,
                         c.maxTens, c.targetVelocity); 
-
+	
+	const tgBasicActuator::Config actuatorConfig(c.stiffness, c.damping, c.pretension,
+        c.history,  c.maxTens, c.targetVelocity);
 
 
     // Start creating the structures
@@ -499,7 +569,8 @@ void TensegrityHedgehogModel12::setup(tgWorld& world)
     tgBuildSpec spec;
     spec.addBuilder("rod", new tgRodInfo(rodConfig));
     spec.addBuilder("payload_rod", new tgRodInfo(payConfig));
-    spec.addBuilder("muscle", new tgBasicActuatorInfo(muscleConfig));
+    //spec.addBuilder("muscle", new tgBasicActuatorInfo(muscleConfig));
+    spec.addBuilder("actuator", new tgBasicActuatorInfo(actuatorConfig));
     spec.addBuilder("muscle_in", new tgBasicActuatorInfo(muscleInConfig));
     spec.addBuilder("box", new tgBoxInfo(boxConfig));//Hedgehog
     
@@ -510,6 +581,24 @@ void TensegrityHedgehogModel12::setup(tgWorld& world)
     // Use the structureInfo to build ourselves
     structureInfo.buildInto(*this, world); //Tensegrity
     structureInfos.buildInto(*this, world); // Hedgehog
+    
+    // Get the rod rigid bodies for controller
+    std::vector<tgRod*> rods = TensegrityHedgehogModel12::find<tgRod>("rod");
+    for (int i = 0; i < rods.size(); i++) {
+        allRods.push_back(TensegrityHedgehogModel12::find<tgRod>(tgString("rod num", i))[0]);    
+    }
+
+    // Get the box rigid bodies for logger
+    std::vector<tgBox*> boxes = TensegrityHedgehogModel12::find<tgBox>("box");
+    for (int i = 0; i < boxes.size(); i++) {
+        allBoxes.push_back(TensegrityHedgehogModel12::find<tgBox>("box")[0]);    
+    }
+    
+    // Get the actuators for controller
+    std::vector<tgBasicActuator*> actuators = TensegrityHedgehogModel12::find<tgBasicActuator>("actuator");
+    for (int i = 0; i < rods.size(); i++) {
+        allActuators.push_back(TensegrityHedgehogModel12::find<tgBasicActuator>(tgString("actuator num", i))[0]);    
+    }
 
     // We could now use tgCast::filter or similar to pull out the
     // models (e.g. muscles) that we want to control. 
@@ -585,6 +674,12 @@ void TensegrityHedgehogModel12::onVisit(tgModelVisitor& r)
 {
     tgModel::onVisit(r);
 }
+
+std::vector<tgBasicActuator*>& TensegrityHedgehogModel12::getAllActuators()
+{
+    return allActuators;
+}
+
 const std::vector<tgSpringCableActuator*>& TensegrityHedgehogModel12::getAllMuscles() const //controller
 //const std::vector<tgBasicActuator*>& TensegrityHedgehogModel12::getAllMuscles() const
 {
@@ -595,6 +690,11 @@ std::vector<tgRod*>& TensegrityHedgehogModel12::getAllRods()
 {
     return allRods;
 }
+//Get Hedgehog to logger
+std::vector<tgBox*>& TensegrityHedgehogModel12::getAllBoxes()
+{
+    return allBoxes;
+}
 
 void TensegrityHedgehogModel12::teardown()
 {
@@ -602,6 +702,16 @@ void TensegrityHedgehogModel12::teardown()
     tgModel::teardown();
 }
            
+
+
+
+
+
+
+
+
+
+
 // Return the center of mass of this model
 // Pre-condition: This model has 12 rods
 
