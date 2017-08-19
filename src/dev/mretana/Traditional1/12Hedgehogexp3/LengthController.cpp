@@ -59,8 +59,8 @@ void LengthController::onSetup(TensegrityHedgehogModel12& subject)
   Boxes = subject.getAllBoxes();
 	
    //set seeds
-  srand(time(NULL));
-  srand48(time(NULL));
+  //srand(time(NULL));
+  //srand48(time(NULL));
 	
 	/*
       //Attach a sensor to each box
@@ -118,7 +118,6 @@ void LengthController::onStep(TensegrityHedgehogModel12& subject, double dt)
   else {
     globalTime += dt;
   } 
-	//std::vector<tgBox *> boxes=find<tgBox>("box");
   
     for(int i=0;i<Boxes.size();i++)
 	{
@@ -128,25 +127,6 @@ void LengthController::onStep(TensegrityHedgehogModel12& subject, double dt)
 			//std::cout << "Cube Height: " << COM.getOrigin().getY() <<  std::endl;
 			std::cout << result<< std::endl;
 	}
-
-/*
-	btQuaternion initialRotationQuat;
-	initialRotationQuat.setEuler(rotationVector[0],rotationVector[1],rotationVector[2]);
-	btTransform initialTransform;
-	initialTransform.setIdentity();
-	initialTransform.setRotation(initialRotationQuat);
-	initialTransform.setOrigin(positionVector);
-
-	  for(int i=0;i<boxes.size();i++)
-	{
-		btTransform COM;//
-		boxes[i]->getPRigidBody()->getMotionState()->getWorldTransform(COM);
-			const btVector3& result = COM.getOrigin();
-			//std::cout << "Cube Height: " << COM.getOrigin().getY() <<  std::endl;
-			std::cout << result<< std::endl;
-	}
-  */
-	//----------------------------------------------------------------
 	  /*
     if(globalTime > 2){ //delay start of cable actuation
       if(toggle==0){ //print once when motors start moving
