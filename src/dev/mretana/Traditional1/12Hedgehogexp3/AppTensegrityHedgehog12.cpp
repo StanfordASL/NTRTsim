@@ -25,7 +25,7 @@
 
 // This application
 #include "TensegrityHedgehogModel12.h"
-#include "LengthController.h"
+#include "Logger.h"
 // This library
 #include "core/terrain/tgBoxGround.h"
 #include "core/tgModel.h"
@@ -36,10 +36,13 @@
 #include "core/terrain/tgEmptyGround.h"
 #include "core/terrain/tgHillyGround.h"
 #include "tgcreator/tgUtil.h"
+#include "core/tgString.h"
 // Bullet Physics
 #include "LinearMath/btVector3.h"
 // The C++ Standard Library
 #include <iostream>
+#include <string>
+#include <fstream>
 
 /**
  * The entry point.
@@ -87,16 +90,18 @@ int main(int argc, char** argv)
     
     //Controllers
     // Create the controller
-    LengthController* const myController = new LengthController();
+    Logger* const mylogger = new Logger();
     
     //Attach controller to the model
-    myModel->attach(myController);
+    myModel->attach(mylogger);
 
     // Add the model to the world
     simulation.addModel(myModel);
     
     // Run until the user stops
     simulation.run();
+    
+
 
     //Teardown is handled by delete, so that should be automatic
     return 0;

@@ -16,8 +16,8 @@
  * governing permissions and limitations under the License.
 */
 
-#ifndef LENGTH_CONTROLLER_H
-#define LENGTH_CONTROLLER_H
+#ifndef LOGGER_H
+#define LOGGER_H
 
 /**
  * @file LengthController.h
@@ -41,7 +41,7 @@
 // Forward declarations
 class TensegrityHedgehogModel12;
 
-class LengthController : public tgObserver<TensegrityHedgehogModel12>
+class Logger : public tgObserver<TensegrityHedgehogModel12>
 {
 public:
 	
@@ -50,12 +50,12 @@ public:
 	 * @param[in] tension, a double specifying the desired tension
 	 * throughougt structure. Must be non-negitive
 	 */
-    LengthController(const double length = 400);
+    Logger(const double length = 400);
     
     /**
      * Nothing to delete, destructor must be virtual
      */
-    virtual ~LengthController();
+    virtual ~Logger();
     
     virtual void onSetup(TensegrityHedgehogModel12& subject);
     
@@ -70,6 +70,7 @@ public:
     //std::vector<tgBasicController*>;
     std::vector<tgBox*> Boxes;
     std::vector<tgRod*> Rods;
+    std::ofstream fileStream;
     
     /*
     std::vector<tgBasicController*> m_controllers; //instantiate vector of controllers
@@ -85,4 +86,4 @@ private:
 
 };
 
-#endif //LENGTH_CONTROLLER_H
+#endif //LOGGER_H

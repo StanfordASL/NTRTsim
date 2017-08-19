@@ -24,7 +24,7 @@
  */
 
 // This module
-#include "LengthController.h"
+#include "Logger.h"
 #include "core/tgBox.h"
 
 // The C++ Standard Library
@@ -39,7 +39,7 @@
 
 using namespace std;
 
-LengthController::LengthController(const double length) :
+Logger::Logger(const double length) :
   m_length(length)
 {
   if (length < 0.0)
@@ -48,16 +48,20 @@ LengthController::LengthController(const double length) :
     }
 }
 
-LengthController::~LengthController()
+Logger::~Logger()
 {
+	if( fileStream.is_open() )
+	{
+		fileStream.close();
+	}
 }	
 
-void LengthController::onSetup(TensegrityHedgehogModel12& subject)
+void Logger::onSetup(TensegrityHedgehogModel12& subject)
 {
   //get all of the tensegrity structure's cables
   Rods = subject.getAllRods();
   Boxes = subject.getAllBoxes();
-	
+
    //set seeds
   //srand(time(NULL));
   //srand48(time(NULL));
@@ -109,8 +113,18 @@ void LengthController::onSetup(TensegrityHedgehogModel12& subject)
     }*/
 }
 
-void LengthController::onStep(TensegrityHedgehogModel12& subject, double dt)
+void Logger::onStep(TensegrityHedgehogModel12& subject, double dt)
 {
+	if( !fileStream.is_open() )
+	{
+		fileStream.open( "/home/tensegribuntu/logger/LoggedData.txt" );
+	}
+	
+	if( !fileStream.good() )
+	{
+		throw std::invalid_argument("ERROR: Could not open the file for data logging.");
+	}
+	
 	
   if (dt <= 0.0) {
     throw std::invalid_argument("dt is not positive");
@@ -119,14 +133,20 @@ void LengthController::onStep(TensegrityHedgehogModel12& subject, double dt)
     globalTime += dt;
   } 
   
+  
     for(int i=0;i<Boxes.size();i++)
 	{
-		btTransform COM;//
+		btTransform COM;// center of mass vector object
+		// 
 		Boxes[i]->getPRigidBody()->getMotionState()->getWorldTransform(COM);
 			const btVector3& result = COM.getOrigin();
 			//std::cout << "Cube Height: " << COM.getOrigin().getY() <<  std::endl;
-			std::cout << result<< std::endl;
+			fileStream << result << std::endl;
+			//std::cout << result<< std::endl;
 	}
+	
+	//fileStream.close();
+	
 	  /*
     if(globalTime > 2){ //delay start of cable actuation
       if(toggle==0){ //print once when motors start moving

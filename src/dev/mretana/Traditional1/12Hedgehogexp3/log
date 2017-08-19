@@ -1,0 +1,18 @@
+    std::fstream fileInputStream;
+    
+    std::ofstream fileOutputStream;
+    
+    fileOutputStream.open( "/home/tensegribuntu/logger/formattedData.txt" );
+    
+    fileInputStream.open(  "/home/tensegribuntu/logger/LoggedData.txt"  );
+    
+    string currentLineOfData;
+    
+    string formattedData;
+    
+    while( !fileInputStream.eof() )
+    {
+	fileInputStream.getline(currentLineOfData);
+	formattedData = currentLineOfData.substr( currentLineOfData.find_first_of("("), currentLineOfData.find_first_of(")") );
+	fileOutputStream << formattedData << std::endl;
+    }
