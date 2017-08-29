@@ -7,5 +7,6 @@ subdirs(
   Traditional1
   IntroSkeleton
   Final_Presentation
+  torque
 )
 
