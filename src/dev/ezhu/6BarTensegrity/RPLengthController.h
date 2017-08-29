@@ -16,67 +16,76 @@
  * governing permissions and limitations under the License.
 */
 
-#ifndef LENGTH_CONTROLLER_H
-#define LENGTH_CONTROLLER_H
+#ifndef RP_LENGTH_CONTROLLER_H
+#define RP_LENGTH_CONTROLLER_H
 
 /**
- * @file LengthController.h
- * @brief Contains the definition of class LengthController.
- * @author Brian Cera
+ * @file RPTensionController.h
+ * @brief Contains the definition of class RPTensionController.
+ * @author Brian Tietz
+ * @version 1.0.0
  * $Id$
  */
-
-#include "threeBarModel.h"
 
 // This library
 #include "core/tgObserver.h"
 #include "controllers/tgBasicController.h"
-#include "core/tgBasicActuator.h"
+ #include "core/tgBasicActuator.h"
 
 // The C++ Standard Library
 #include <vector>
 
 // Forward declarations
-class threeBarModel;
+class TensegrityModel;
 
-class LengthController : public tgObserver<threeBarModel>
+#include "core/abstractMarker.h" //needed in order to fetch node positions
+
+/**
+ * A controller to apply uniform tension to a RPModel. Iterates through
+ * all tgLinearString members and calls tensionMinLengthController
+ */
+class RPLengthController : public tgObserver<TensegrityModel>
 {
 public:
 	
 	/**
-	 * Construct a LengthTensionController.
+	 * Construct a RPTensionController.
 	 * @param[in] tension, a double specifying the desired tension
 	 * throughougt structure. Must be non-negitive
 	 */
-    LengthController(const double length = 400);
+    RPLengthController(const double length = 400);
     
     /**
      * Nothing to delete, destructor must be virtual
      */
-    virtual ~LengthController();
+    virtual ~RPLengthController();
     
-    virtual void onSetup(threeBarModel& subject);
+    virtual void onSetup(TensegrityModel& subject);
     
     /**
-     * Apply the length controller. Called by notifyStep(dt) of its
-     * subject.
+     * Apply the tension controller. Called my notifyStep(dt) of its
+     * subject. The tgLinearStrings will update using
+     * their tensionMinLengthController each step
      * @param[in] subject - the RPModel that is being controlled. Must
      * have a list of allMuscles populated
      * @param[in] dt, current timestep must be positive
      */
-    virtual void onStep(threeBarModel& subject, double dt);
+    virtual void onStep(TensegrityModel& subject, double dt);
 
-    std::vector<tgBasicController*> m_controllers; //instantiate vector of controllers
-    std::vector<double> rand_lengths; //instantiate vector of random restlengths
-    std::vector<double> start_lengths; //instantiate vector of random restlengths
-    std::vector<tgBasicActuator*> actuators;
+    std::vector<tgBasicController*> m_controllers;
+    std::vector<double> rand_lengths;
+    std::vector<tgSpringCableActuator*> actuators;
     
 private:
 	
+	/**
+	 * The tension setpoint that will be passed to the muscles. Set
+	 * in the constructor
+	 */
     const double m_length;
-    double globalTime = 0;
+    double globalTime;
     int toggle;
 
 };
 
-#endif LENGTH_CONTROLLER_H
+#endif // RP_LENGTH_CONTROLLER_H

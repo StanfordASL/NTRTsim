@@ -16,30 +16,21 @@
  * governing permissions and limitations under the License.
 */
 
-#ifndef THREE_BAR_MODEL_H
-#define THREE_BAR_MODEL_H
+#ifndef FLEMONSARM_MODEL_H
+#define FLEMONSARM_MODEL_H
 
 /**
- * @file 3BarModel.h
- * @brief Defines a 3 strut 9 string tensegrity model
- * @author Edward Zhu
+ * @file ErikScarrModel.h
+ * @brief Defines an arm model, based off of Scarr's model.
+ * @author Erik Jung
+ * @version 1.0.0
  * $Id$
  */
 
 // This library
 #include "core/tgModel.h"
 #include "core/tgSubject.h"
-
-// Builder libraries
-#include "core/tgBasicActuator.h"
 #include "core/tgRod.h"
-#include "tgcreator/tgNode.h"
-#include "tgcreator/tgBuildSpec.h"
-#include "tgcreator/tgBasicActuatorInfo.h"
-#include "tgcreator/tgRodInfo.h"
-#include "tgcreator/tgStructure.h"
-#include "tgcreator/tgStructureInfo.h"
-
 // The C++ Standard Library
 #include <vector>
 
@@ -55,7 +46,7 @@ class tgWorld;
  * uses the new (to v1.1) ability to define pretension in a
  * tgBasicActuator's constructor
  */
-class threeBarModel : public tgSubject<threeBarModel>, public tgModel
+class FlemonsArmModel : public tgSubject<FlemonsArmModel>, public tgModel
 {
 public: 
     
@@ -63,13 +54,13 @@ public:
      * The only constructor. Configuration parameters are within the
      * .cpp file in this case, not passed in. 
      */
-    threeBarModel();
+    FlemonsArmModel();
     
     /**
      * Destructor. Deletes controllers, if any were added during setup.
      * Teardown handles everything else.
      */
-    virtual ~threeBarModel();
+    virtual ~FlemonsArmModel();
     
     /**
      * Create the model. Place the rods and strings into the world
@@ -85,7 +76,7 @@ public:
      * Undoes setup. Deletes child models. Called automatically on
      * reset and end of simulation. Notifies controllers of teardown
      */
-    virtual void teardown();
+    void teardown();
     
     /**
      * Step the model, its children. Notifies controllers of step.
@@ -103,32 +94,27 @@ public:
     virtual void onVisit(tgModelVisitor& r);
     
     /**
-     * Return a vector of all actuators for the controllers to work with.
-     * @return A vector of all of the actuators
+     * Return a vector of all muscles for the controllers to work with.
+     * @return A vector of all of the muscles
      */
-    std::vector<tgBasicActuator*>& getAllActuators();
 
-    /**
-     * Return a vector of all rod bodies for the controllers to work with.
-     * @return A vector of all of the rod rigid bodies
-     */
-    std::vector<tgRod*>& getAllRods();
+    const std::vector<tgBasicActuator*>& getAllMuscles() const;
       
 private:
-    
+    static void populateMasslessSupport(tgStructure& masslessbase);
+    /**
+    * A function called during setup that creates muscles (Strings) from
+    * the relevant nodes. Rewrite this function for your own models.
+    * @param[in] s A tgStructure that we're building into
+    */   
+
     /**
      * A function called during setup that determines the positions of
      * the nodes based on construction parameters. Rewrite this function
      * for your own models
      * @param[in] s: A tgStructure that we're building into
-     * @param[in] edge: the X distance of the base points
-     * @param[in] width: the Z distance of the base triangle
-     * @param[in] height: the Y distance along the axis of the prism
      */
-    static void addNodes(tgStructure& s,
-                            double edge,
-                            double width,
-                            double height);
+    void addNodes(tgStructure& s);
     
     /**
      * A function called during setup that creates rods from the
@@ -138,24 +124,23 @@ private:
     static void addRods(tgStructure& s);
     
     /**
-     * A function called during setup that creates actuators (Strings) from
+     * A function called during setup that creates muscles (Strings) from
      * the relevant nodes. Rewrite this function for your own models.
      * @param[in] s A tgStructure that we're building into
      */
-    static void addActuators(tgStructure& s);
+    void addMuscles(tgStructure& s);
 
 private:    
-    /**
-     * A list of all of the basic actuators. Will be empty until most of the way
-     * through setup when it is filled using tgModel's find methods
-     */
-    std::vector<tgBasicActuator*> allActuators;
+/**
+* A list of all of the muscles. Will be empty until most of the way
+* through setup
+*/
 
-    /**
-     * A list of all of the rods. Will be empty until most of the way
-     * through setup when it is filled using tgModel's find methods
-     */
-    std::vector<tgRod*> allRods;
+	//const size_t nMuscles;
+	std::vector<tgBasicActuator*> allMuscles;
+	std::vector<std::vector <tgBasicActuator *> > musclesPerNodes;
+	std::vector<std::vector<std::vector<int> > > nodeNumberingSchema;
+	std::vector<btVector3> nodePositions;
 };
 
-#endif  // THREE_BAR_MODEL_H
+#endif  // FLEMONSARM_MODEL_H

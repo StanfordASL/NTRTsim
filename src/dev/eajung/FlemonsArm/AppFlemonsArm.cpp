@@ -17,16 +17,14 @@
 */
 
 /**
- * @file App3BarTraditional.cpp
- * @brief Contains the definition function main() for the Three strut
- * tensegrity prism example application (using traditional NTRT system).
- * @author Edward Zhu, Drew Sabelhaus
+ * @file AppFlemonsArm.cpp
+ * @brief Contains the definition function main() for model of Tom Flemon's tensegrity arm
+ * @author Erik Jung
  * $Id$
  */
 
 // This application
-#include "threeBarModel.h"
-#include "LengthController.h"
+#include "FlemonsArm.h"
 // This library
 #include "core/terrain/tgBoxGround.h"
 #include "core/tgModel.h"
@@ -46,7 +44,7 @@
  */
 int main(int argc, char** argv)
 {
-    std::cout << "App3Bar" << std::endl;
+    std::cout << "AppFlemonsArmModelTest" << std::endl;
 
     // First create the ground and world. Specify ground rotation in radians
     const double yaw = 0.0;
@@ -56,9 +54,7 @@ int main(int argc, char** argv)
     // the world will delete this
     tgBoxGround* ground = new tgBoxGround(groundConfig);
     
-    double sf = 10;
-    double gravity = 9.81*sf;
-    const tgWorld::Config config(gravity); // gravity, cm/sec^2
+    const tgWorld::Config config(981); // gravity, cm/sec^2
     tgWorld world(config, ground);
 
     // Second create the view
@@ -71,15 +67,8 @@ int main(int argc, char** argv)
 
     // Fourth create the models with their controllers and add the models to the
     // simulation
-    threeBarModel* const myModel = new threeBarModel();
+    FlemonsArmModel* const myModel = new FlemonsArmModel();
     
-    // Create the controller
-    // FILL IN 5.4 HERE
-    // FILL_IN* const myController = new FILL_IN();
-
-    // Attach controller to the model
-    // FILL IN 5.6 HERE
-
     // Add the model to the world
     simulation.addModel(myModel);
     

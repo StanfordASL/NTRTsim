@@ -17,16 +17,15 @@
 */
 
 /**
- * @file AppHorizontalSpine.cpp
- * @brief Contains the definition function main() for App3BarYAML
- * which builds an example 3 bar prism using YAML.
- * @author Andrew Sabelhaus
+ * @file App6Bar.cpp
+ * @brief Contains the definition function main() for App6Bar
+ * which builds a 6 bar tensegrity structure defined in YAML
+ * @author Edward Zhu
  * $Id$
  */
 
 // This application
-#include "yamlbuilder/TensegrityModel.h"
-#include "LengthControllerYAML.h"
+#include "../../../yamlbuilder/TensegrityModel.h"
 // This library
 #include "core/terrain/tgBoxGround.h"
 #include "core/tgModel.h"
@@ -37,8 +36,8 @@
 #include "LinearMath/btVector3.h"
 // The C++ Standard Library
 #include <iostream>
-#include <string>
-#include <vector>
+// Controller for tension sensing
+#include "RPLengthController.h"
 
 /**
  * The entry point.
@@ -49,13 +48,6 @@
  */
 int main(int argc, char** argv)
 {
-    // For this YAML parser app, need to check that an argument path was
-    // passed in.
-    if (argv[1] == NULL)
-    {
-      throw std::invalid_argument("No arguments passed in to the application. You need to specify which YAML file you wouldd like to build.");
-    }
-  
     // create the ground and world. Specify ground rotation in radians
     const double yaw = 0.0;
     const double pitch = 0.0;
@@ -68,8 +60,7 @@ int main(int argc, char** argv)
     tgWorld world(config, ground);
 
     // create the view
-    const double timestep_physics = 0.0001; // seconds
-    //const double timestep_physics = 0.001;
+    const double timestep_physics = 0.001; // seconds
     const double timestep_graphics = 1.f/60.f; // seconds
     tgSimViewGraphics view(world, timestep_physics, timestep_graphics);
 
@@ -77,33 +68,18 @@ int main(int argc, char** argv)
     tgSimulation simulation(view);
 
     // create the models with their controllers and add the models to the simulation
-    // This constructor for TensegrityModel takes the 'debugging' flag as the
-    // second argument.
-    TensegrityModel* const myModel = new TensegrityModel(argv[1],false);
+    TensegrityModel* const myModel = new TensegrityModel(argv[1]);
 
-    // Attach a controller to the model, if desired.
-    // This is a controller that interacts with a generic TensegrityModel as
-    // built by the TensegrityModel file.
-
-    // Parameters for the LengthControllerYAML are specified in that .h file,
-    // repeated here:
-    double startTime = 5.0;
-    double minLength = 0.7;
-    double rate = 0.25;
-    std::vector<std::string> tagsToControl;
-    // See the threeBarModel.YAML file to see where "vertical_string" is used.
-    tagsToControl.push_back("horizontal_string");
-    
     // Create the controller
-    // FILL IN 6.6 HERE
-    // FILL_IN* const myController = new FILL_IN(startTime, minLength, rate, tagsToControl);
-    
-    // Attach the controller to the model
-    // FILL IN 6.7 HERE
+    RPLengthController* const tension_sensor = new RPLengthController();
+
+    // Attach controller to the model
+    myModel -> attach(tension_sensor);
 
     // Add the model to the world
     simulation.addModel(myModel);
-
+    
+    // Run the simulation
     simulation.run();
 
     // teardown is handled by delete

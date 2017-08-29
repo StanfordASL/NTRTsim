@@ -15,6 +15,7 @@ subdirs(
     jbruce
     dhustigschultz
     CPG_feedback
+    eajung
     ezhu
     mcdaly
     bgigous
