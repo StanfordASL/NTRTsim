@@ -107,7 +107,7 @@ namespace
 	//Box parameters 
     } c =
    {
-       0.688,     // density (mass / length^3)
+       1,     // density (mass / length^3)
        0.15,     // radius (length)
        1000.0,   // stiffness (mass / sec^2)
        50.0,     // damping (mass / sec)

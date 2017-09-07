@@ -92,15 +92,15 @@ void Logger::onStep(TensegrityHedgehogModel12& subject, double dt)
     for(int i=0;i<Boxes.size();i++)
 	{
 		btTransform COM;// center of mass vector object
-		const btVector3& angularVector;
-		// 
+		btVector3 m_linearVelocity;
+
 		Boxes[i]->getPRigidBody()->getMotionState()->getWorldTransform(COM);
-		Boxes[i]->getPRigidBody()->getLinearVelocity(angularVector);
+		Boxes[i]->getPRigidBody()->getLinearVelocity();
 			const btVector3& result = COM.getOrigin();
-			//const btVector3& torque= rot.getTotalTorque(); exp
+			//const btVector3& torque = m_linearVelocity;
 			//fileStream << result << std::endl; Needed to log into file
 			std::cout << result<< std::endl; //activate if you want to see output display in screen
-			//std::cout << torque<< std::endl;
+			//std::cout << torque << std::endl;
 		}
 	
 }
