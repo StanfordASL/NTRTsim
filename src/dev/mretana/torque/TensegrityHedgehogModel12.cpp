@@ -501,15 +501,15 @@ void TensegrityHedgehogModel12::setup(tgWorld& world)
     //Vectors that input angular velocity, linear velocity, etc.
     btVector3 location(0,0,0);
     btVector3 rotation(0.0,0,0.0);
-    btVector3 angular(0,0,60); //Rad/sec y is up. //JUST CHANGE THIS VECTOR
+    btVector3 torque(0,0,60); //Rad/sec y is up. //JUST CHANGE THIS VECTOR
     //btVector3 angular(30,0,0);
-    this->moveModel(location,rotation,angular);
+    this->moveModel(location,rotation,torque);
 
     // Actually setup the children
     tgModel::setup(world);
 }
 
-void TensegrityHedgehogModel12::moveModel(btVector3 positionVector,btVector3 rotationVector,btVector3 angularVector)
+void TensegrityHedgehogModel12::moveModel(btVector3 positionVector,btVector3 rotationVector,btVector3 torqueVector)
 {
     std::vector<tgBox *> boxes=find<tgBox>("box");
 
@@ -524,7 +524,7 @@ void TensegrityHedgehogModel12::moveModel(btVector3 positionVector,btVector3 rot
 	
 	for(int i=0;i<boxes.size();i++)
 	{
-			boxes[i]->getPRigidBody()->setAngularVelocity(angularVector);
+			boxes[i]->getPRigidBody()->applyTorqueImpulse(torqueVector);
 			boxes[i]->getPRigidBody()->setWorldTransform(initialTransform * boxes[i]->getPRigidBody()->getWorldTransform());
 		        boxes[i]->getPRigidBody()->getLinearVelocity();
 	}

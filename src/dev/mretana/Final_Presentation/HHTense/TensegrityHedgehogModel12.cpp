@@ -112,7 +112,7 @@ namespace
      15.0,     // rod_length (length)  15
      3.75,      // rod_space (length) 3.75
      0.5,         // half payload height (length)
-     0.1,        //cage density (kg/length^3)
+     0.5,        //cage density (kg/length^3)
      0.025,        //cage radius (length)
      0.99,      // friction (unitless)
      0.1,     // rollFriction (unitless)
@@ -500,7 +500,7 @@ void TensegrityHedgehogModel12::setup(tgWorld& world)
     //Vectors that input angular velocity, linear velocity, etc.
     btVector3 location(0,0,0);
     btVector3 rotation(0.0,0,0.0);
-    btVector3 angular(0,0,60); //Rad/sec y is up. //JUST CHANGE THIS VECTOR
+    btVector3 angular(0,0,30); // Nms are the units of torque
     //btVector3 angular(30,0,0);
     this->moveModel(location,rotation,angular);
 
@@ -523,7 +523,7 @@ void TensegrityHedgehogModel12::moveModel(btVector3 positionVector,btVector3 rot
 	
 	for(int i=0;i<boxes.size();i++)
 	{
-			boxes[i]->getPRigidBody()->setAngularVelocity(angularVector);
+			boxes[i]->getPRigidBody()->applyTorqueImpulse(angularVector);
 			boxes[i]->getPRigidBody()->setWorldTransform(initialTransform * boxes[i]->getPRigidBody()->getWorldTransform());
 		        boxes[i]->getPRigidBody()->getLinearVelocity();
 	}
